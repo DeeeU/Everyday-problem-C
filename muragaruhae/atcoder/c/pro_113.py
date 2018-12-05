@@ -6,6 +6,7 @@ for i in range(M):
     field.append((y, p, i))
 field.sort()
 print(field)
+print(field)
 #入力と番号付け
 sum = [0 for i in range(N)]
 field2 = []
