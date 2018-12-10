@@ -1,0 +1,3 @@
+g++ -std=c++14 main.cpp -Wall -g -fsanitize=undefined -D_GLIBCXX_DEBUG
+cat input
+cat input | ./a.out
