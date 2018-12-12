@@ -5,8 +5,7 @@ for i in range(M):
     p,y = map(int, input().split())
     field.append((y, p, i))
 field.sort()
-print(field)
-print(field)
+
 #入力と番号付け
 sum = [0 for i in range(N)]
 field2 = []

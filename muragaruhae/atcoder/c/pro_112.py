@@ -18,8 +18,8 @@ for x, y, h in lst:
         break
 print(base)
 #
-# for cx in range(100 + 1):
-#     for cy in range(100 + 1):
+# for cx in range(101):
+#     for cy in range(101):
 #         H = base[2] + abs(base[0] - cx) + abs(base[1] - cy)
 #         if all([max(H - abs(x - cx) - abs(y - cy), 0) == h for x, y, h in lst]):
 #             print(cx, cy, H)
