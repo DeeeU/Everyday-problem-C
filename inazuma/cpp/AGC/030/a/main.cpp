@@ -12,16 +12,10 @@ typedef long long ll;
 typedef pair<int, int> p;
 
 int main(){
-  int n;
-  cin >> n;
-  vector<int> v(n, 0);
-  bool flag = false;
-  for (int i = 0; i < n; i++) {
-    cin >> v[i];
-    if(v[i] % 2 == 1) flag = true;
-  }
-
-  if(flag) cout << "first" << endl;
-  else cout << "second" << endl;
+  int a, b, c;
+  cin >> a >> b >> c;
+  if(c > b + a) cout << (b + a) + b + 1 << endl;
+  else if(c > b) cout << b + c << endl;
+  else cout << c + b << endl;
 
 }

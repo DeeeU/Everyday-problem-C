@@ -10,9 +10,9 @@ using namespace std;
 
 typedef long long ll;
 
-map<ll, ll> mp;
 
-void bunkai(ll p){
+map<ll, ll> bunkai(ll p){
+  map<ll, ll> mp;
   ll maxv = pow(p, 0.5) + 1;
   for (ll i = 2; i <= maxv; i++) {
     while(p % i == 0){
@@ -20,6 +20,7 @@ void bunkai(ll p){
       p /= i;
     }
   }
+  return mp;
 }
 
 
