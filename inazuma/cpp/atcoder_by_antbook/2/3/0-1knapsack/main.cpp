@@ -28,6 +28,7 @@ int dfs(int step, int maxw)
   return dp[step][maxw] = res;
 }
 
+
 int main(){
   cin >> n >> w;
   for (int i = 0; i < n; i++) {
