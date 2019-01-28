@@ -112,6 +112,9 @@ int main(){
     }
 
     res = djikstra(field, startY, startX, goalY, goalX);
+    cout << res << endl;
+    cout << ave << endl;
+    cout << "====" << endl;
     if(res == t) break;
     if(res < t) left = ave;
     else right = ave;
