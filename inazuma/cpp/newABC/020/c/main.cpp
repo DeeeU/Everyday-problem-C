@@ -31,38 +31,31 @@ struct Node {
 //   }
 // }
 
-int djikstra(vector<vector<Node>> v, int startY, int startX, int goalY, int goalX){
-  v[startY][startX].minCost = 0;
-  int ny = startY;
-  int nx = startX;
+int djikstra(vector<Node> v, int start, int goal){
+  int nodeNum = int(v.size());
+  v[0].minCost = 0;
+  int now = start;
   while(true) {
     // printNode(v);
-    v[ny][nx].done = true;
-    int edgeNum = int(v[ny][nx].to.size());
+    v[now].done = true;
+    int edgeNum = int(v[now].to.size());
     for (int i = 0; i < edgeNum; i++) {
-      int nextNodeIndexY = v[ny][nx].to[i].first;
-      int nextNodeIndexX = v[ny][nx].to[i].second;
-      v[nextNodeIndexY][nextNodeIndexX].minCost =
-        min(v[nextNodeIndexY][nextNodeIndexX].minCost, v[ny][nx].minCost + v[ny][nx].cost[i]);
+      int nextNodeIndex = v[now].to[i];
+      v[nextNodeIndex].minCost =
+        min(v[nextNodeIndex].minCost, v[now].minCost + v[now].cost[i]);
     }
 
-    int minNodeIndexY = -1;
-    int minNodeIndexX = -1;
-    ll minNodeCost = LLONG_MAX;
-    for (int i = 0; i < h; i++) {
-      for (int j = 0; j < w; j++) {
-        // cout << v[i][j].minCost << endl;
-        if(minNodeCost > v[i][j].minCost && !v[i][j].done){
-          minNodeIndexY = i;
-          minNodeIndexX = j;
-          minNodeCost = v[i][j].minCost;
-        }
+    int minNodeIndex = -1;
+    int minNodeCost = INT_MAX;
+    for (int i = 0; i < nodeNum; i++) {
+      if(i == now) continue;
+      if(minNodeCost > v[i].minCost && !v[i].done){
+        minNodeIndex = i;
+        minNodeCost = v[i].minCost;
       }
     }
-    ny = minNodeIndexY;
-    nx = minNodeIndexX;
-    // cout << ny << " : " << nx << endl;
-    if(ny == goalY && nx == goalX) return v[ny][nx].minCost;
+    now = minNodeIndex;
+    if(now == goal) return v[now].minCost;
   }
 }
 
@@ -88,14 +81,11 @@ int main(){
   int dy[] = {0, 1};
 
   ll res = -1;
-  ll left = 0;
-  ll right = pow(10, 9) + 10;
-  ll ave = (left + right) / 2;
-  ll beforeAve = ave;
-  while(right - left > 1){
+  ll ave = -1;
+  for (ll a = 1; a <= 100; a++) {
+    cout << "a" << endl;
+    cout << a << endl;
     vector<vector<Node>> field(h, vector<Node>(w));
-    beforeAve = ave;
-    ave = (left + right) / 2;
     for (int i = 0; i < h; i++) {
       for (int j = 0; j < w; j++) {
         for (int k = 0; k < 2; k++) {
@@ -106,19 +96,17 @@ int main(){
           if(v[y][x] == '.' || v[y][x] == 'S' || v[y][x] == 'G')
             field[i][j].cost.push_back(1);
           else
-            field[i][j].cost.push_back(ave);
+            field[i][j].cost.push_back(a);
         }
       }
     }
-
     res = djikstra(field, startY, startX, goalY, goalX);
-    cout << res << endl;
-    cout << ave << endl;
-    cout << "====" << endl;
-    if(res == t) break;
-    if(res < t) left = ave;
-    else right = ave;
+    // cout << res << endl;
+    // cout << a << endl;
+    // cout << "==" << endl;
+    if(res <= t) ave = max(ave, a);
+    cout << "=================================" << endl;
   }
-  if(res <= t) cout << ave << endl;
-  else cout << beforeAve << endl;
+  // cout << res << endl;
+  cout << ave << endl;
 }
