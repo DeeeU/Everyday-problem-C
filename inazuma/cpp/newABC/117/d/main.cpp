@@ -25,7 +25,6 @@ int main(){
 
   for (int i = 0; i < n; i++) {
     // bitset<50> tmp = bitset<50> (v[i]);
-    // cout << tmp << endl;
     for (ll j = 0; j < 50; j++) {
       if(v[i] & (1ll<<j)){
         count[j]++;
@@ -33,41 +32,12 @@ int main(){
     }
   }
 
-  if(n == 1 && k == 0){
-    cout << v[0] << endl;
-    return 0;
-  }
-
-  int goal = -1;
-  for (int i = 49; i >= 0; i--) {
-    if(count[i] != 0) {
-      goal = i;
-      break;
+  for (int i = 0; i < 50; i++) {
+    if((count[i] > double(n / 2))){
+      count[i] = (n - count[i]) * pow(2, i);
     }
   }
 
+  print(count);
 
-  ll res = 0;
-  for (int i = 0; i <= goal; i++) {
-    if(double(count[i]) <= double(n / 2)){
-      res += pow(2, i);
-    }
-  }
-
-  for (int i = goal+1; i < 50; i++){
-    if(res + pow(2, i) < k) res += pow(2, i);
-    else break;
-  }
-
-
-  ll res2 = -1;
-  for (int i = res; i <= k; i++) {
-    ll next_res = 0;
-    for (int j = 0; j < n; j++) {
-      next_res += v[j] ^ i;
-    }
-    res2 = max(res2, next_res);
-  }
-
-  cout << res2 << endl;
 }
